@@ -1,0 +1,2424 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="shortcut icon" href="images/fav-icon.png" />
+    <link rel="stylesheet" href="styles/swiper-bundle.min.css" />
+    <script type="text/javascript">
+      document.documentElement.classList.toggle(
+        "dark",
+        localStorage.theme === "dark" ||
+          (!("theme" in localStorage) &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches)
+      );
+    </script>
+  </head>
+  <body class="bg-gray-100 dark:bg-zinc-800 font-Dana">
+    <!-- svg icons -->
+
+    <svg class="hidden">
+      <symbol
+        id="shopping-cart"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+        />
+      </symbol>
+
+      <symbol
+        id="moon"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
+        />
+      </symbol>
+
+      <symbol
+        id="sun"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+        />
+      </symbol>
+
+      <symbol
+        id="arrow-left-on-rectangle"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75"
+        />
+      </symbol>
+
+      <symbol
+        id="chevron-left"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15.75 19.5 8.25 12l7.5-7.5"
+        />
+      </symbol>
+
+      <symbol
+        id="mobile-logo"
+        viewBox="0 0 100 40"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M7.22937 0.610531C4.44214 1.47319 2.66845 3.11226 1.2326 6.17471C-1.55463 12.1271 0.514679 18.0795 6.13137 20.2361C8.49629 21.0988 14.7887 21.487 15.8867 20.7537C16.1401 20.5812 16.3934 18.9421 16.4779 16.8717C16.6468 12.5584 16.4779 12.3859 12.5504 12.5584C9.76321 12.6878 9.00306 13.3348 10.6923 14.1112C11.917 14.6719 12.4237 16.2247 12.0437 17.9069C11.7903 18.8559 11.5791 18.9853 10.6078 18.7265C7.35606 17.9069 6.13137 15.7934 6.13137 10.9625C6.08914 8.11571 6.30029 7.20991 7.10267 5.74338C9.00306 2.29272 5.28675 2.55152 53.2186 2.55152C83.9626 2.55152 96.1251 2.68092 96.5474 3.02599C97.1808 3.58672 97.3498 13.3348 96.7163 13.3348C96.5051 13.3348 94.9848 11.4801 93.3378 9.23717L90.3395 5.13951H87.8056C86.412 5.13951 85.2718 5.22578 85.2718 5.35518C85.2718 5.48458 85.5674 6.04531 85.9475 6.60604C86.4542 7.46871 86.5387 8.71957 86.412 13.4211C86.3275 16.5698 86.1164 19.5891 85.9475 20.1499C85.6096 21.0988 85.6518 21.1419 87.2144 21.0125L88.8614 20.8831L88.9881 16.4404C89.0303 14.025 89.2837 12.0408 89.4948 12.0408C89.6638 12.0408 91.0996 13.9818 92.6199 16.3541C95.4494 20.7969 96.1251 21.3145 98.6167 21.0125L99.8414 20.8831L99.9681 11.8683C100.095 1.68886 99.9681 1.2144 97.2231 0.437998C96.1673 0.136066 81.1754 -0.0364666 52.3318 0.00666618C17.4492 0.00666618 8.70744 0.136066 7.22937 0.610531Z"
+        />
+        <path
+          d="M24.0797 5.13955C22.1371 5.61401 19.3921 7.64127 18.3785 9.40973C17.8718 10.3587 17.5762 11.6958 17.5339 13.3349C17.4917 15.4052 17.7029 16.0522 18.7164 17.3894C20.2789 19.4598 21.9682 20.5381 24.8398 21.142C29.3585 22.0909 34.384 20.193 36.1577 16.8718C39.5784 10.5312 35.3553 4.57882 27.5426 4.75135C26.4446 4.79448 24.8821 4.96702 24.0797 5.13955ZM29.5697 7.85694C29.9498 8.15887 30.6677 9.06467 31.1745 9.8842C34.0461 14.7151 29.1896 21.2714 25.1355 18.0364C22.1371 15.6209 21.9259 11.0057 24.7132 8.37454C25.9801 7.16681 28.3872 6.95114 29.5697 7.85694Z"
+        />
+        <path
+          d="M52.9652 12.9466V21.1851L58.2441 21.0125C64.3253 20.7969 66.3524 20.0636 68.1683 17.3462C69.5197 15.2758 69.6463 11.2644 68.4217 9.19403C66.4368 5.87278 63.4807 4.75132 56.9771 4.70818H52.9652V12.9466ZM62.7205 8.7627C64.0297 10.0998 64.1564 10.488 64.1564 12.6447C64.1564 16.6561 62.7627 18.5108 59.7644 18.5108H58.2441V13.2054C58.2441 10.2724 58.3707 7.72751 58.5397 7.59811C59.2998 6.77858 61.3691 7.38244 62.7205 8.7627Z"
+        />
+        <path
+          d="M71.2508 12.3426C71.3353 16.5696 71.462 20.2791 71.5465 20.5379C71.6731 20.9692 73.2357 21.0986 77.4165 21.0986C82.8221 21.0986 83.1599 21.0555 83.7511 20.1497C84.6802 18.7694 84.638 17.4323 83.7089 17.9068C83.2866 18.1224 81.6396 18.295 79.9926 18.295H77.0364V16.1383V13.9817L79.0213 13.8523C80.4994 13.766 81.2173 13.4641 81.6818 12.7739C82.0197 12.2563 82.3153 11.6956 82.3153 11.5231C82.3153 11.3505 81.1328 11.178 79.697 11.0917L77.0364 10.9623L76.9098 9.40954C76.7408 7.20975 77.501 6.64902 80.0771 7.25288C81.8085 7.64108 82.1886 7.59795 82.6531 6.99408C82.9065 6.60588 83.1599 5.91575 83.1599 5.48442C83.1599 4.75116 82.6531 4.70802 77.1631 4.70802H71.1241L71.2508 12.3426Z"
+        />
+        <path
+          d="M39.1559 12.5583C39.2403 16.8284 39.4937 20.236 39.7471 20.5379C40.0427 20.9261 41.6052 21.0986 44.6881 21.0986C49.4602 21.0986 50.347 20.7967 50.7271 19.1145C50.9382 18.2087 50.8115 18.1656 47.9399 18.2518L44.9415 18.295V11.6956V5.13935H41.9853H39.0292L39.1559 12.5583Z"
+        />
+        <path
+          d="M4.31542 24.2908C2.11942 25.3691 0.683576 27.0513 0.134577 29.208C-0.287731 30.847 0.387961 34.7721 1.35927 36.2387C3.13296 38.9129 7.65165 40.25 13.0572 39.7756C15.5066 39.5168 15.6755 39.4736 16.2667 38.0071C16.6046 37.1876 16.7735 36.4112 16.689 36.2818C16.5623 36.1955 15.591 36.4112 14.493 36.7994C12.0436 37.6621 10.3966 37.6621 8.91857 36.8857C6.25803 35.4623 4.94888 32.788 5.54011 30.0275C6.46919 25.671 9.08749 24.5496 13.6062 26.4906C14.2819 26.7925 14.3663 26.62 14.2396 25.1534L14.1129 23.4712L10.3122 23.3418C7.01819 23.2556 6.2158 23.385 4.31542 24.2908Z"
+        />
+        <path
+          d="M24.9239 23.9024C20.363 25.1964 17.7447 28.7333 18.2515 33.0035C18.7583 37.6187 23.108 40.4224 29.2315 39.9479C35.735 39.5166 39.7047 33.823 37.382 28.302C35.7772 24.42 30.1183 22.4359 24.9239 23.9024ZM31.0896 27.353C32.5255 29.0352 33.0745 31.3644 32.5255 33.4779C31.0896 38.9559 25.2196 38.8265 23.5726 33.2192C22.0945 28.1726 27.8801 23.6436 31.0896 27.353Z"
+        />
+        <path
+          d="M40.0431 23.5574C40.0008 23.7731 40.0431 24.075 40.1275 24.3338C40.212 24.5495 40.3809 28.0432 40.5076 32.0978L40.7187 39.4304L43.4637 39.5598L46.251 39.6892L46.2087 36.1092V32.5291L48.4047 32.3997C50.6852 32.2703 51.7832 31.4939 51.3187 30.3724C51.1497 29.898 50.4318 29.7254 48.5314 29.7254H45.9976V27.8276C45.9976 25.4984 46.6311 25.1533 49.6294 25.8435C51.4454 26.2748 51.741 26.2317 52.2477 25.5415C52.5434 25.1102 52.7123 24.5063 52.67 24.1181C52.5434 23.6005 51.4876 23.4711 46.2932 23.3417C42.8725 23.2986 40.0431 23.3849 40.0431 23.5574Z"
+        />
+        <path
+          d="M55.2453 23.5574C55.2031 23.7731 55.2453 24.075 55.3298 24.3338C55.4143 24.5495 55.5832 28.0432 55.7099 32.0978L55.921 39.4304L58.666 39.5598L61.4532 39.6892L61.411 36.1092V32.5291L63.607 32.3997C65.8875 32.2703 66.9855 31.4939 66.5209 30.3724C66.352 29.898 65.6341 29.7254 63.7337 29.7254H61.1999V27.8276C61.1999 25.4984 61.8333 25.1533 64.8317 25.8435C66.6476 26.2748 66.9432 26.2317 67.45 25.5415C67.7456 25.1102 67.9145 24.5063 67.8723 24.1181C67.7456 23.6005 66.6899 23.4711 61.4955 23.3417C58.0748 23.2986 55.2453 23.3849 55.2453 23.5574Z"
+        />
+        <path
+          d="M70.4486 23.5576C70.4064 23.7732 70.4486 24.0752 70.4909 24.334C70.5753 24.5496 70.5753 27.8709 70.5753 31.6235C70.5331 36.0231 70.702 38.7404 70.9976 39.0855C71.3355 39.5168 72.9403 39.6462 77.0789 39.6462H82.7378L83.4557 38.1366C84.3426 36.2819 84.0469 35.9368 82.3155 36.8426C81.4709 37.2739 80.2462 37.4896 78.8103 37.4033L76.6143 37.2739L76.4876 34.7722L76.3609 32.3136H78.4303C80.584 32.3136 81.4709 31.796 81.4709 30.502C81.4709 29.855 81.0908 29.7256 78.8948 29.7256H76.3609L76.4876 27.6552C76.6143 25.4123 76.8677 25.2829 80.2884 25.973C81.6398 26.275 81.9354 26.1887 82.3155 25.4123C83.329 23.4713 82.78 23.2556 76.4032 23.2556C73.1514 23.2556 70.4486 23.385 70.4486 23.5576Z"
+        />
+        <path
+          d="M86.4542 30.4589C86.4964 34.4703 86.6654 38.1366 86.7498 38.6542C86.961 39.6462 87.0877 39.6462 92.9155 39.6462H98.8278L99.4613 38.1366C100.264 36.1093 100.264 36.1093 98.5322 36.8426C96.674 37.619 93.1267 37.7052 92.5777 36.9288C92.3665 36.6701 92.2398 35.7211 92.282 34.9016C92.3243 34.0821 92.4087 33.1331 92.4087 32.8312C92.451 32.4861 93.1689 32.3136 94.5203 32.3136C96.674 32.3136 97.8143 31.5372 97.392 30.4157C97.223 29.9844 96.3784 29.7256 94.6892 29.6393L92.2398 29.5099L92.1131 27.9571C91.9442 25.7142 92.7044 25.1966 95.4494 25.8005C97.392 26.2318 97.6876 26.1887 98.1944 25.5417C98.5322 25.1104 98.7434 24.4634 98.6589 24.1183C98.5744 23.6007 97.4764 23.4713 92.451 23.3419L86.3275 23.2125L86.4542 30.4589Z"
+        />
+      </symbol>
+
+      <symbol
+        id="bars-3"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+        />
+      </symbol>
+
+      <symbol
+        id="x-mark"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18 18 6M6 6l12 12"
+        />
+      </symbol>
+      <!--  -->
+      <symbol
+        id="home"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+        />
+      </symbol>
+
+      <symbol
+        id="shopping-bag"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+        />
+      </symbol>
+
+      <symbol
+        id="chat-bubble-left-ellipsis"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"
+        />
+      </symbol>
+
+      <symbol
+        id="briefcase"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 0 0 .75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 0 0-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0 1 12 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 0 1-.673-.38m0 0A2.18 2.18 0 0 1 3 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 0 1 3.413-.387m7.5 0V5.25A2.25 2.25 0 0 0 13.5 3h-3a2.25 2.25 0 0 0-2.25 2.25v.894m7.5 0a48.667 48.667 0 0 0-7.5 0M12 12.75h.008v.008H12v-.008Z"
+        />
+      </symbol>
+
+      <symbol
+        id="document-text"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+        />
+      </symbol>
+
+      <symbol id="phone-arrow-up-right" viewBox="0 0 20 20" fill="currentColor">
+        <path
+          fill-rule="evenodd"
+          d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+          clip-rule="evenodd"
+        />
+      </symbol>
+
+      <symbol
+        id="curve"
+        width="100"
+        height="22"
+        viewBox="0 0 100 22"
+        fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M50 0C69 0 81 22 100 22L0 22C18.75 22 31 0 50 0Z" />
+      </symbol>
+
+      <symbol
+        id="chevron-down"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="m19.5 8.25-7.5 7.5-7.5-7.5"
+        />
+      </symbol>
+
+      <symbol id="chevron-left-mini" viewBox="0 0 20 20" fill="currentColor">
+        <path
+          fill-rule="evenodd"
+          d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"
+          clip-rule="evenodd"
+        />
+      </symbol>
+
+      <symbol
+        id="star"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"
+        />
+      </symbol>
+
+      <symbol
+        id="arrows-right-left"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
+        />
+      </symbol>
+
+      <symbol
+        id="phone"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"
+        />
+      </symbol>
+
+      <symbol
+        id="service-1"
+        width="52"
+        height="73"
+        viewBox="0 0 52 73"
+        fill="#000"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M29.05 8.5V1.5H21.55V8.5L17.05 18L16.55 30H24.55V18L29.05 8.5Z"
+          fill="#0D9488"
+        />
+        <path
+          d="M50.2009 16.1646L46.2333 8.22953V1.21667C46.2333 0.544762 45.6886 0 45.0167 0H6.08333C5.41143 0 4.86667 0.544762 4.86667 1.21667V8.22953L0.899117 16.1646C0.308882 17.3478 0.00121667 18.6518 0 19.974V71.7833C0 72.4552 0.544763 73 1.21667 73H49.8833C50.5552 73 51.1 72.4552 51.1 71.7833V19.974C51.0988 18.6518 50.7911 17.3478 50.2009 16.1646ZM30.4167 2.43333H43.8V7.3H30.4167V2.43333ZM23.0108 9.0155C23.0181 9.0009 23.0279 8.96197 23.0388 8.9352C23.0821 8.8181 23.1071 8.69491 23.113 8.5702C23.113 8.55317 23.1228 8.53978 23.1228 8.52275V2.43333H27.9894L27.9833 8.22953L24.0158 16.1646C23.4256 17.3478 23.1179 18.6518 23.1167 19.974V29.2H18.25V19.974C18.2515 19.0294 18.4713 18.0979 18.8924 17.2523L22.995 9.06052C23.0023 9.04592 23.0035 9.0301 23.0108 9.0155ZM7.3 2.43333H20.6833V7.3H7.3V2.43333ZM38.9333 19.974V70.5667H2.43333V19.974C2.43485 19.0294 2.65461 18.0979 3.07573 17.2523L6.83523 9.73333H19.9314L16.7158 16.1646C16.1256 17.3478 15.8179 18.6518 15.8167 19.974V30.4167C15.8167 31.0886 16.3614 31.6333 17.0333 31.6333H24.3333C25.0052 31.6333 25.55 31.0886 25.55 30.4167V19.974C25.5515 19.0294 25.7713 18.0979 26.1924 17.2523L29.9519 9.73333H43.0481L39.8325 16.1646C39.2422 17.3478 38.9346 18.6518 38.9333 19.974ZM48.6667 70.5667H41.3667V19.974C41.3682 19.0294 41.588 18.0979 42.0091 17.2523L45.0167 11.2371L48.0243 17.2523C48.4454 18.0979 48.6652 19.0294 48.6667 19.974V70.5667Z"
+          fill="currentColor"
+        />
+        <path
+          d="M30.05 47.5L29.55 43.5L27.55 40.5H23.05L16.05 43.5L11.55 50L12.05 57L16.55 59L21.55 58L27.55 53L30.05 47.5Z"
+          fill="#FDBA74"
+        />
+        <path
+          d="M22.265 39.5659C19.3649 40.227 16.7206 41.7195 14.6559 43.8607C12.5173 45.9246 11.0266 48.5671 10.366 51.4649C9.70029 53.9429 10.3468 56.5895 12.0802 58.4814C13.4184 59.7706 15.2211 60.464 17.0783 60.4037C17.7578 60.4031 18.4357 60.3352 19.1016 60.2006C22.0017 59.5395 24.646 58.0469 26.7107 55.9057C28.8493 53.8418 30.34 51.1994 31.0006 48.3016C31.6663 45.8235 31.0198 43.177 29.2863 41.285C27.3949 39.547 24.7454 38.8982 22.265 39.5659ZM12.7506 51.9516C13.3185 49.5228 14.5799 47.3113 16.3812 45.586C18.1072 43.7821 20.3206 42.519 22.7516 41.9506C23.2555 41.8481 23.768 41.7951 24.2822 41.7924C25.2621 41.7658 26.2263 42.0415 27.044 42.582C26.5093 42.9966 25.9283 43.3476 25.3127 43.6283C22.816 44.8347 20.8007 46.8499 19.5944 49.3467C19.1389 50.3617 18.4896 51.2778 17.683 52.044C16.916 52.8507 15.9996 53.5002 14.9844 53.9566C14.2344 54.3043 13.5247 54.7335 12.8686 55.2366C12.5418 54.1709 12.5011 53.0379 12.7506 51.9516ZM28.616 47.8149C28.0481 50.2437 26.7867 52.4551 24.9854 54.1805C23.2594 55.9844 21.046 57.2474 18.615 57.8159C17.1562 58.1979 15.6048 57.9724 14.3153 57.1905C14.8524 56.7728 15.4363 56.4187 16.0551 56.1357C17.308 55.5608 18.4417 54.7555 19.3973 53.762C20.394 52.8075 21.2017 51.6736 21.7783 50.4198C22.7468 48.4048 24.3721 46.7795 26.387 45.811C27.1356 45.4629 27.8435 45.0333 28.4979 44.5299C28.8248 45.5955 28.8655 46.7286 28.616 47.8149Z"
+          fill="#3F3F46"
+        />
+      </symbol>
+
+      <symbol id="curve-footer" viewBox="0 0 100 22" fill="currentColor">
+        <path
+          d="M50 22C31 22 19 -3.26655e-06 1.9233e-06 -3.02023e-06L100 -3.8147e-06C81.25 -5.45387e-06 69 22 50 22Z"
+        />
+      </symbol>
+
+      <symbol
+        id="map-mini"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+        />
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+        />
+      </symbol>
+
+      <symbol
+        id="envelope"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+        />
+      </symbol>
+    </svg>
+
+    <!-- header -->
+    <header
+      class="hidden md:block bg-black/50 w-[98%] lg:w-[90%] mx-auto px-5 lg:px-10 py-5 rounded-3xl h-24 fixed left-0 right-0 top-9 backdrop-blur-[6px] z-50"
+    >
+      <!-- NAVBAR -->
+      <nav class="flex w-full justify-between h-14">
+        <!-- menu & logo -->
+        <div
+          class="flex items-center gap-x-3 lg:gap-x-5 xl:gap-x-9 [&>*]:h-full"
+        >
+          <!-- LOGO -->
+          <div>
+            <img src="images/app-logo.png" alt="" />
+          </div>
+          <!-- MENU -->
+          <ul
+            class="flex gap-x-5 xl:gap-x-8 2xl:gap-x-9 text-lg lg:text-xl text-gray-300 leading-14"
+          >
+            <li class="font-DanaMedium text-orange-200">
+              <a href="#">صفحه اصلی</a>
+            </li>
+            <!-- has sub -->
+            <li class="relative group">
+              <a href="#" class="group-hover:text-orange-300">فروشگاه</a>
+              <!-- sub menu -->
+              <div
+                class="shadow-normal group-hover:opacity-100 opacity-0 group-hover:visible invisible bg-white dark:bg-zinc-700 [&>*]:inline-block absolute text-zinc-700 dark:text-white w-52 p-6 rounded-2xl text-[16px] border-t-[3px] leading-normal space-y-4 border-t-[#FAB873] [&>*]:transition-colors [&>*]:hover:text-orange-300 transition-all delay-75"
+              >
+                <a href="#">قهوه ویژه</a>
+
+                <a href="#">ویژه در سطح جهانی</a>
+
+                <a href="#">قهوه درجه یک</a>
+
+                <a href="#">ترکیبات تجاری</a>
+
+                <a href="#">کپسول قهوه</a>
+
+                <a href="#">قهوه زینو برزیلی</a>
+              </div>
+            </li>
+            <li>
+              <a href="#">دیکشنری</a>
+            </li>
+            <li>
+              <a href="#">بلاگ</a>
+            </li>
+            <li>
+              <a href="#">درباره ما</a>
+            </li>
+            <li>
+              <a href="#">تماس با ما</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- cart & theme switch & signup/in -->
+        <div class="flex items-center text-orange-200 gap-3 lg:gap-5 xl:gap-10">
+          <!-- cart & theme switch -->
+          <div class="flex gap-3 lg:gap-x-5 items-center max-h-14">
+            <!-- cart  -->
+            <div class="relative group">
+              <!-- cart HOVER  -->
+              <div class="py-3">
+                <svg class="size-8 cursor-pointer">
+                  <use href="#shopping-cart"></use>
+                </svg>
+              </div>
+
+              <!-- cart BOX -->
+
+              <div
+                class="absolute top-full left-0 group-hover:opacity-100 group-hover:visible w-100 p-5 opacity-0 invisible bg-white dark:bg-zinc-700 border-t-[3px] border-t-orange-300 shadow-normal rounded-2xl transition-all delay-75"
+              >
+                <!-- cart BOX head -->
+                <div class="flex justify-between items-center">
+                  <span class="text-[#D1D5DB]">1 مورد</span>
+                  <a href="#" class="flex items-center text-orange-300">
+                    <span>مشاهده سبد خرید</span>
+                    <svg class="size-5">
+                      <use href="#chevron-left"></use>
+                    </svg>
+                  </a>
+                </div>
+                <!-- cart BOX main -->
+
+                <div class="">
+                  <div class="flex items-center mt-5">
+                    <div class="ml-2.5">
+                      <img
+                        src="images/products/p1.png"
+                        class="max-w-30 h-30"
+                        alt=""
+                      />
+                    </div>
+                    <div>
+                      <p
+                        class="text-[#3F3F46] mb-6 font-DanaMedium text-[16px] dark:text-white"
+                      >
+                        قهوه اسپرسو بن مانو مدل پریسکا 250 گرمی
+                      </p>
+                      <span class="text-[#0D9488] text-[12px] font-DanaMedium"
+                        >14.500 تومان تخفیف</span
+                      >
+                      <p
+                        class="text-[#3F3F46] font-DanaDemiBold dark:text-white"
+                      >
+                        175,000 تومان
+                      </p>
+                    </div>
+                  </div>
+                  <span
+                    class="block h-px my-5 w-90 bg-[#F3F4F6] dark:opacity-5"
+                  ></span>
+                  <div class="flex items-center mt-5">
+                    <div class="ml-2.5">
+                      <img
+                        src="images/products/p2.png"
+                        class="max-w-30 h-30"
+                        alt=""
+                      />
+                    </div>
+                    <div>
+                      <p
+                        class="text-[#3F3F46] mb-6 font-DanaMedium text-[16px] dark:text-white line-clamp-2"
+                      >
+                        قهوه اسپرسو بن مانو مدل پریسکا 250 گرمی قهوه اسپرسو بن
+                        مانو مدل پریسکا 250 گرمی قهوه اسپرسو بن مانو مدل پریسکا
+                        250 گرمی قهوه اسپرسو بن مانو مدل پریسکا 250 گرمی
+                      </p>
+                      <span class="text-[#0D9488] text-[12px] font-DanaMedium"
+                        >14.500 تومان تخفیف</span
+                      >
+                      <p
+                        class="text-[#3F3F46] font-DanaDemiBold dark:text-white"
+                      >
+                        175,000 تومان
+                      </p>
+                    </div>
+                  </div>
+                  <span
+                    class="block h-px my-5 w-90 bg-[#F3F4F6] dark:opacity-5"
+                  ></span>
+
+                  <div class="flex justify-between items-center">
+                    <div>
+                      <span class="text-[12px] font-DanaMedium text-[#D1D5DB]"
+                        >مبلغ قابل پرداخت</span
+                      >
+                      <p
+                        class="font-DanaDemiBold text-[#3F3F46] dark:text-white"
+                      >
+                        350,000 تومان
+                      </p>
+                    </div>
+                    <a
+                      href="#"
+                      class="text-white bg-[#0D9488] flex h-14 justify-center items-center w-36 text-xl rounded-[14px]"
+                      >ثبت سفارش</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- theme switch -->
+
+            <div class="cursor-pointer toggle-theme">
+              <svg class="size-8 h-0 hidden dark:h-8 dark:block">
+                <use href="#moon"></use>
+              </svg>
+              <svg class="size-8 h-8 block dark:h-0 dark:hidden">
+                <use href="#sun"></use>
+              </svg>
+            </div>
+          </div>
+
+          <!-- border -->
+          <span class="block w-px h-14 bg-white/20"></span>
+
+          <!-- signup/in -->
+
+          <div class="flex text-xl">
+            <a href="#" class="flex items-center">
+              <svg class="size-8 rotate-180 ml-2.5">
+                <use href="#arrow-left-on-rectangle"></use>
+              </svg>
+              <p class="hidden xl:inline-block">ورود | ثبت‌نام</p>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- mobile-NAv -->
+    <div
+      class="flex items-center justify-between bg-white dark:bg-zinc-700 dark:text-white h-16 w-full md:hidden px-4"
+    >
+      <div id="mobile-nav-bars">
+        <svg class="size-8 cursor-pointer">
+          <use href="#bars-3"></use>
+        </svg>
+      </div>
+
+      <div
+        class="w-64 min-h-screen right-[-256px] top-0 bg-white dark:bg-zinc-700 fixed z-20 px-4 py-3 divide-y divide-gray-100 transition-all"
+        id="mobile-nav"
+      >
+        <div class="flex justify-between items-center pb-6">
+          <div class="flex gap-3.5">
+            <img class="w-10 h-10" src="images/app-logo.png" alt="" />
+            <svg class="w-25 h-10 text-orange-300">
+              <use href="#mobile-logo"></use>
+            </svg>
+          </div>
+          <div id="close-nav">
+            <svg class="size-5 cursor-pointer">
+              <use href="#x-mark"></use>
+            </svg>
+          </div>
+        </div>
+
+        <ul class="text-zinc-600 dark:text-white py-6">
+          <li class="bg-orange-300/15 rounded-[6px] text-orange-300 p-3 flex">
+            <svg class="size-5 ml-2">
+              <use href="#home"></use>
+            </svg>
+            <a href="#">صفحه اصلی</a>
+          </li>
+
+          <li
+            class="rounded-[6px] justify-between p-3 text-orange-300 flex cursor-pointer"
+            id="mobile-menu-links"
+          >
+            <div class="flex items-center">
+              <svg class="size-5 ml-2">
+                <use href="#shopping-bag"></use>
+              </svg>
+              <a href="#">فروشگاه</a>
+            </div>
+
+            <svg class="size-4" id="chevron-rotate">
+              <use href="#chevron-left"></use>
+            </svg>
+          </li>
+
+          <ul class="flex-col mr-7 text-sm *:mb-3 hidden" id="mobile-sub-menu">
+            <li>
+              <span>قهوه ویژه</span>
+            </li>
+            <li class="relative mr-3">
+              <span class="menu-mobile-active">ویژه در سطح جهانی</span>
+            </li>
+            <li>
+              <span>قهوه درجه یک</span>
+            </li>
+            <li>
+              <span>ترکیبات تجاری</span>
+            </li>
+          </ul>
+
+          <li class="rounded-[6px] p-3 flex">
+            <svg class="size-5 ml-2">
+              <use href="#chat-bubble-left-ellipsis"></use>
+            </svg>
+            <a href="#">دیکشنری</a>
+          </li>
+
+          <li class="rounded-[6px] p-3 flex">
+            <svg class="size-5 ml-2">
+              <use href="#briefcase"></use>
+            </svg>
+            <a href="#">درباره ما</a>
+          </li>
+
+          <li class="rounded-[6px] p-3 flex">
+            <svg class="size-5 ml-2">
+              <use href="#document-text"></use>
+            </svg>
+            <a href="#">بلاگ</a>
+          </li>
+
+          <li class="rounded-[6px] p-3 flex">
+            <svg class="size-5 ml-2">
+              <use href="#phone-arrow-up-right"></use>
+            </svg>
+            <a href="#">تماس با ما</a>
+          </li>
+        </ul>
+
+        <div
+          class="pt-6 text-orange-300 inline-flex items-start flex-col space-y-4"
+        >
+          <a href="#" class="inline-flex items-center">
+            <svg class="size-5 rotate-180 ml-2">
+              <use href="#arrow-left-on-rectangle"></use>
+            </svg>
+            <span>ورود | ثبت‌ نام</span>
+          </a>
+
+          <div class="cursor-pointer inline-flex items-center toggle-theme">
+            <svg class="size-5 h-0 hidden dark:h-5 dark:block ml-2">
+              <use href="#moon"></use>
+            </svg>
+            <svg class="size-5 h-5 block dark:h-0 dark:hidden ml-2">
+              <use href="#sun"></use>
+            </svg>
+            <p class="block dark:hidden">تم روشن</p>
+            <p class="hidden dark:block">تم دارک</p>
+          </div>
+
+          <a href="#" class="inline-flex items-center">
+            <svg class="size-5 ml-2">
+              <use href="#shopping-cart"></use>
+            </svg>
+            <span>سبد خرید</span>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <svg class="w-25 h-10 text-orange-300">
+          <use href="#mobile-logo"></use>
+        </svg>
+      </div>
+
+      <div>
+        <svg class="size-8" id="shopping-cart-mobile">
+          <use href="#shopping-cart"></use>
+        </svg>
+      </div>
+
+      <!-- Cart mobile -->
+
+      <div
+        class="w-64 min-h-screen top-0 left-[-256px] bg-white dark:bg-zinc-700 flex flex-col fixed z-20 px-4 py-[22px] transition-all"
+        id="mobile-cart"
+      >
+        <div
+          class="flex justify-between items-center pb-6 border-b-2 border-white/15"
+        >
+          <svg class="size-5 cursor-pointer" id="x-mark-cart">
+            <use href="#x-mark"></use>
+          </svg>
+          <span>سبد خرید</span>
+        </div>
+
+        <div class="">
+          <div class="flex items-center mt-5 pb-5 border-b-2 border-white/5">
+            <div class="ml-2.5">
+              <img
+                src="images/products/p4.png"
+                class="max-w-[90px] h-[90px]"
+                alt=""
+              />
+            </div>
+            <div>
+              <p
+                class="text-[#3F3F46] mb-1.5 font-DanaMedium text-sm dark:text-white"
+              >
+                قهوه اسپرسو بن مانو مدل پریسکا 250 گرمی
+              </p>
+              <span class="text-[#0D9488] text-[12px] font-DanaMedium"
+                >14.500 تومان تخفیف</span
+              >
+              <p class="text-[#3F3F46] font-DanaDemiBold dark:text-white">
+                175,000 تومان
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center mt-5 pb-5 border-b-2 border-white/5">
+            <div class="ml-2.5">
+              <img
+                src="images/products/p3.png"
+                class="max-w-[90px] h-[90px]"
+                alt=""
+              />
+            </div>
+            <div>
+              <p
+                class="text-[#3F3F46] mb-1.5 font-DanaMedium text-sm dark:text-white"
+              >
+                قهوه اسپرسو بن مانو مدل پریسکا 250 گرمی
+              </p>
+              <span class="text-[#0D9488] text-[12px] font-DanaMedium"
+                >14.500 تومان تخفیف</span
+              >
+              <p class="text-[#3F3F46] font-DanaDemiBold dark:text-white">
+                175,000 تومان
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex gap-x-4 grow items-end">
+          <div>
+            <a
+              href="#"
+              class="block py-2.5 px-4 bg-emerald-600 rounded-xl text-white"
+            >
+              ثبت سفارش
+            </a>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-xs">مبلغ قابل پرداخت</span>
+            <span class="text-base">350,000 تومان</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- overlay -->
+    <div
+      class="hidden overlay bg-black/50 fixed w-full h-full inset-0 z-10 md:hidden"
+      id="overlay"
+    ></div>
+
+    <!-- Main -->
+    <main>
+      <!-- Home -->
+      <section
+        class="bg-[url(../images/headerBgMobile.webp)] h-50 xs:h-auto md:h-[95vh] relative xs:aspect-[2/1] md:aspect-auto md:bg-[url(../images/headerBgDesktop.webp)] bg-no-repeat bg-cover bg-center"
+      >
+        <div
+          class="container relative h-full flex justify-end items-center overflow-y-hidden"
+        >
+          <div
+            class="text-white md:h-screen flex flex-col justify-center items-end"
+          >
+            <h2 class="font-MorabbaBold text-2xl sm:text-3xl md:text-6xl mb-2">
+              قهوه عربیکا تانزانیا
+            </h2>
+            <span
+              class="font-MorabbaLight text-xl sm:text-2xl md:text-5xl md:leading-15"
+              >یک فنجان بالانس !</span
+            >
+            <span class="h-px md:h-0.5 w-25 bg-orange-300 my-3 md:my-8"></span>
+            <p
+              class="text-xs sm:text-base md:text-2xl max-w-50 sm:max-w-58 md:max-w-115"
+            >
+              قطعا نام آشنای عربیکا را شنیده اید، عربیکا یکی از گونه های قهوه
+              است که در نواحی مختلف کمربند قهوه کشت میشود.
+            </p>
+          </div>
+
+          <div class="circle circle--lg">
+            <div class="circle circle--md">
+              <div class="circle circle--sm"></div>
+            </div>
+          </div>
+        </div>
+
+        <svg
+          class="w-[100px] h-[22px] hidden md:inline-block absolute -bottom-0.5 right-0 left-0 mx-auto text-white dark:text-zinc-800"
+        >
+          <use href="#curve"></use>
+        </svg>
+
+        <div
+          class="absolute left-0 right-0 -bottom-[15px] mx-auto text-white hidden md:flex justify-center"
+        >
+          <div
+            class="w-7.5 h-7.5 border-2 border-orange-300 flex justify-center items-center rounded-full"
+          >
+            <svg class="size-5 text-zinc-700 dark:text-white">
+              <use href="#chevron-down"></use>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- Products -->
+
+      <section class="mb-8 md:mb-20">
+        <div class="products">
+          <div class="container">
+            <div class="flex justify-between items-end pt-8 md:pt-30 xl:pt-48">
+              <div>
+                <h3 class="section-title">جدیدترین محصولات</h3>
+                <span class="section-subtitle">فرآوری شده از دانه قهوه</span>
+              </div>
+
+              <a href="#" class="section-link">
+                <span class="hidden md:inline-block">مشاهده همه محصولات</span>
+                <span class="inline-block md:hidden">مشاهده همه</span>
+
+                <svg class="size-5">
+                  <use href="#chevron-left-mini"></use>
+                </svg>
+              </a>
+            </div>
+
+            <div
+              class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 pt-5 md:pt-12"
+            >
+              <div
+                class="bg-white dark:bg-zinc-700 rounded-2xl shadow-normal p-2 sm:p-5 dark:text-white"
+              >
+                <img src="images/products/p1.png" alt="" />
+                <p
+                  class="pt-5 mb-1.5 text-sm sm:text-base xl:text-xl font-DanaMedium line-clamp-2"
+                >
+                  قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی
+                </p>
+                <span
+                  class="text-emerald-700 pb-2.5 md:pb-4 inline-block sm:text-lg md:text-xl"
+                  >175,000 تومان</span
+                >
+                <div class="flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="bg-red w-9 h-9 flex justify-center items-center bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-teal-600 group cursor-pointer transition-all"
+                    >
+                      <svg
+                        class="size-5.5 text-gray-400 group-hover:text-white"
+                      >
+                        <use href="#shopping-cart"></use>
+                      </svg>
+                    </div>
+                    <svg
+                      class="size-5.5 text-gray-400 hover:text-teal-600 cursor-pointer"
+                    >
+                      <use href="#arrows-right-left"></use>
+                    </svg>
+                  </div>
+
+                  <div class="hidden sm:flex">
+                    <svg class="size-4 lg:size-6 text-gray-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-gray-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-white dark:bg-zinc-700 rounded-2xl shadow-normal p-2 sm:p-5 dark:text-white"
+              >
+                <img src="images/products/p2.png" alt="" />
+                <p
+                  class="pt-5 mb-1.5 text-sm sm:text-base xl:text-xl font-DanaMedium line-clamp-2"
+                >
+                  قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی
+                </p>
+                <span
+                  class="text-emerald-700 pb-2.5 md:pb-4 inline-block sm:text-lg md:text-xl"
+                  >175,000 تومان</span
+                >
+                <div class="flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="bg-red w-9 h-9 flex justify-center items-center bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-teal-600 group cursor-pointer transition-all"
+                    >
+                      <svg
+                        class="size-5.5 text-gray-400 group-hover:text-white"
+                      >
+                        <use href="#shopping-cart"></use>
+                      </svg>
+                    </div>
+                    <svg
+                      class="size-5.5 text-gray-400 hover:text-teal-600 cursor-pointer"
+                    >
+                      <use href="#arrows-right-left"></use>
+                    </svg>
+                  </div>
+
+                  <div class="hidden sm:flex">
+                    <svg class="size-4 lg:size-6 text-gray-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-gray-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-white dark:bg-zinc-700 rounded-2xl shadow-normal p-2 sm:p-5 dark:text-white"
+              >
+                <img src="images/products/p3.png" alt="" />
+                <p
+                  class="pt-5 mb-1.5 text-sm sm:text-base xl:text-xl font-DanaMedium line-clamp-2"
+                >
+                  قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی
+                </p>
+                <span
+                  class="text-emerald-700 pb-2.5 md:pb-4 inline-block sm:text-lg md:text-xl"
+                  >175,000 تومان</span
+                >
+                <div class="flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="bg-red w-9 h-9 flex justify-center items-center bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-teal-600 group cursor-pointer transition-all"
+                    >
+                      <svg
+                        class="size-5.5 text-gray-400 group-hover:text-white"
+                      >
+                        <use href="#shopping-cart"></use>
+                      </svg>
+                    </div>
+                    <svg
+                      class="size-5.5 text-gray-400 hover:text-teal-600 cursor-pointer"
+                    >
+                      <use href="#arrows-right-left"></use>
+                    </svg>
+                  </div>
+
+                  <div class="hidden sm:flex">
+                    <svg class="size-4 lg:size-6 text-gray-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-gray-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-white dark:bg-zinc-700 rounded-2xl shadow-normal p-2 sm:p-5 dark:text-white"
+              >
+                <img src="images/products/p4.png" alt="" />
+                <p
+                  class="pt-5 mb-1.5 text-sm sm:text-base xl:text-xl font-DanaMedium line-clamp-2"
+                >
+                  قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی
+                </p>
+                <span
+                  class="text-red-500 pb-2.5 md:pb-4 inline-block sm:text-lg md:text-xl"
+                  >فعلا موجود نیست</span
+                >
+                <div class="flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="bg-red w-9 h-9 flex justify-center items-center bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-teal-600 group cursor-pointer transition-all"
+                    >
+                      <svg
+                        class="size-5.5 text-gray-400 group-hover:text-white"
+                      >
+                        <use href="#shopping-cart"></use>
+                      </svg>
+                    </div>
+                    <svg
+                      class="size-5.5 text-gray-400 hover:text-teal-600 cursor-pointer"
+                    >
+                      <use href="#arrows-right-left"></use>
+                    </svg>
+                  </div>
+
+                  <div class="hidden sm:flex">
+                    <svg class="size-4 lg:size-6 text-gray-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-gray-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-white dark:bg-zinc-700 rounded-2xl shadow-normal p-2 sm:p-5 dark:text-white"
+              >
+                <img src="images/products/p2.png" alt="" />
+                <p
+                  class="pt-5 mb-1.5 text-sm sm:text-base xl:text-xl font-DanaMedium line-clamp-2"
+                >
+                  قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی
+                </p>
+
+                <span
+                  class="text-emerald-700 inline-block sm:text-lg md:text-xl pb-2.5 md:pb-4"
+                  >175,000 تومان</span
+                >
+
+                <div class="flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="bg-red w-9 h-9 flex justify-center items-center bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-teal-600 group cursor-pointer transition-all"
+                    >
+                      <svg
+                        class="size-5.5 text-gray-400 group-hover:text-white"
+                      >
+                        <use href="#shopping-cart"></use>
+                      </svg>
+                    </div>
+                    <svg
+                      class="size-5.5 text-gray-400 hover:text-teal-600 cursor-pointer"
+                    >
+                      <use href="#arrows-right-left"></use>
+                    </svg>
+                  </div>
+
+                  <div class="hidden sm:flex">
+                    <svg class="size-4 lg:size-6 text-gray-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-gray-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-white dark:bg-zinc-700 rounded-2xl shadow-normal p-2 sm:p-5 dark:text-white"
+              >
+                <img src="images/products/p1.png" alt="" />
+                <p
+                  class="pt-5 mb-1.5 text-sm sm:text-base xl:text-xl font-DanaMedium line-clamp-2"
+                >
+                  قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی
+                </p>
+                <span
+                  class="text-emerald-700 pb-2.5 md:pb-4 inline-block sm:text-lg md:text-xl"
+                  >175,000 تومان</span
+                >
+                <div class="flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="bg-red w-9 h-9 flex justify-center items-center bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-teal-600 group cursor-pointer transition-all"
+                    >
+                      <svg
+                        class="size-5.5 text-gray-400 group-hover:text-white"
+                      >
+                        <use href="#shopping-cart"></use>
+                      </svg>
+                    </div>
+                    <svg
+                      class="size-5.5 text-gray-400 hover:text-teal-600 cursor-pointer"
+                    >
+                      <use href="#arrows-right-left"></use>
+                    </svg>
+                  </div>
+
+                  <div class="hidden sm:flex">
+                    <svg class="size-4 lg:size-6 text-gray-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-gray-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-white dark:bg-zinc-700 rounded-2xl shadow-normal p-2 sm:p-5 dark:text-white"
+              >
+                <img src="images/products/p4.png" alt="" />
+                <p
+                  class="pt-5 mb-1.5 text-sm sm:text-base xl:text-xl font-DanaMedium line-clamp-2"
+                >
+                  قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی
+                </p>
+                <span
+                  class="text-red-500 pb-2.5 md:pb-4 inline-block sm:text-lg md:text-xl"
+                  >فعلا موجود نیست</span
+                >
+                <div class="flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="bg-red w-9 h-9 flex justify-center items-center bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-teal-600 group cursor-pointer transition-all"
+                    >
+                      <svg
+                        class="size-5.5 text-gray-400 group-hover:text-white"
+                      >
+                        <use href="#shopping-cart"></use>
+                      </svg>
+                    </div>
+                    <svg
+                      class="size-5.5 text-gray-400 hover:text-teal-600 cursor-pointer"
+                    >
+                      <use href="#arrows-right-left"></use>
+                    </svg>
+                  </div>
+
+                  <div class="hidden sm:flex">
+                    <svg class="size-4 lg:size-6 text-gray-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-gray-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-white dark:bg-zinc-700 rounded-2xl shadow-normal p-2 sm:p-5 dark:text-white"
+              >
+                <img src="images/products/p3.png" alt="" />
+                <p
+                  class="pt-5 mb-1.5 text-sm sm:text-base xl:text-xl font-DanaMedium line-clamp-2"
+                >
+                  قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی
+                </p>
+                <span
+                  class="text-emerald-700 pb-2.5 md:pb-4 inline-block sm:text-lg md:text-xl"
+                  >175,000 تومان</span
+                >
+                <div class="flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="bg-red w-9 h-9 flex justify-center items-center bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-teal-600 group cursor-pointer transition-all"
+                    >
+                      <svg
+                        class="size-5.5 text-gray-400 group-hover:text-white"
+                      >
+                        <use href="#shopping-cart"></use>
+                      </svg>
+                    </div>
+                    <svg
+                      class="size-5.5 text-gray-400 hover:text-teal-600 cursor-pointer"
+                    >
+                      <use href="#arrows-right-left"></use>
+                    </svg>
+                  </div>
+
+                  <div class="hidden sm:flex">
+                    <svg class="size-4 lg:size-6 text-gray-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-gray-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                    <svg class="size-4 lg:size-6 text-yellow-300">
+                      <use href="#star"></use>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- category -->
+      <section class="mb-10 md:mb-20">
+        <div class="container flex flex-col md:flex-row text-white gap-5">
+          <a
+            href="#"
+            class="category--banner-1 h-35.5 md:h-62 w-full flex flex-col justify-center rounded-2xl pr-7 md:pr-12"
+          >
+            <span class="text-2xl md:text-4xl font-DanaDemiBold"
+              >ا نواع قهوه</span
+            >
+            <span class="md:text-xl md:font-medium">ترکیبی و تک خاستگاه</span>
+          </a>
+          <a
+            href="#"
+            class="category--banner-2 h-35.5 md:h-62 w-full flex flex-col justify-center rounded-2xl pr-7 md:pr-12"
+          >
+            <span class="text-2xl md:text-4xl font-DanaDemiBold"
+              >انواع قهوه</span
+            >
+            <span class="md:text-xl md:font-medium">ترکیبی و تک خاستگاه</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- products category -->
+
+      <section class="mb-10 md:mb-20">
+        <div class="container flex justify-between flex-wrap gap-8 lg:gap-16">
+          <a href="#" class="flex flex-col items-center grow">
+            <img
+              class="h-25 md:h-50"
+              src="images/categories/category1.png"
+              alt="1"
+            />
+            <span
+              class="text-sm md:text-xl font-DanaDemiBold text-zinc-700 dark:text-white"
+              >قهوه دمی و اسپرسو</span
+            >
+          </a>
+          <a href="#" class="flex flex-col items-center grow">
+            <img
+              class="h-25 md:h-50"
+              src="images/categories/category2.png"
+              alt="1"
+            />
+            <span
+              class="text-sm md:text-xl font-DanaDemiBold text-zinc-700 dark:text-white"
+              >قهوه دمی و اسپرسو</span
+            >
+          </a>
+          <a href="#" class="flex flex-col items-center grow">
+            <img
+              class="h-25 md:h-50"
+              src="images/categories/category3.png"
+              alt="1"
+            />
+            <span
+              class="text-sm md:text-xl font-DanaDemiBold text-zinc-700 dark:text-white"
+              >قهوه دمی و اسپرسو</span
+            >
+          </a>
+          <a href="#" class="flex flex-col items-center grow">
+            <img
+              class="h-25 md:h-50"
+              src="images/categories/category4.png"
+              alt="1"
+            />
+            <span
+              class="text-sm md:text-xl font-DanaDemiBold text-zinc-700 dark:text-white"
+              >قهوه دمی و اسپرسو</span
+            >
+          </a>
+          <a href="#" class="flex flex-col items-center grow">
+            <img
+              class="h-25 md:h-50"
+              src="images/categories/category5.png"
+              alt="1"
+            />
+            <span
+              class="text-sm md:text-xl font-DanaDemiBold text-zinc-700 dark:text-white"
+              >قهوه دمی و اسپرسو</span
+            >
+          </a>
+        </div>
+      </section>
+
+      <!-- best products -->
+      <section class="mb-8 md:mb-20">
+        <div class="container">
+          <div class="flex justify-between items-end mb-5 md:mb-12">
+            <div>
+              <h3 class="section-title">محصولات پرفروش</h3>
+              <span class="section-subtitle">پیشنهاد قهوه خور ها ...</span>
+            </div>
+
+            <div class="flex gap-3 md:gap-4.5">
+              <div class="swiper-button-prev-custom">
+                <svg class="size-5 md:size-6 -rotate-90 ml-0.5 md:ml-1">
+                  <use href="#chevron-down"></use>
+                </svg>
+              </div>
+              <div class="swiper-button-next-custom">
+                <svg class="size-5 md:size-6 rotate-90 mr-0.5 md:mr-1">
+                  <use href="#chevron-down"></use>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slider main container -->
+          <div class="swiper">
+            <!-- Additional required wrapper -->
+
+            <div class="swiper-wrapper">
+              <!-- Slides -->
+              <div class="swiper-slide">
+                <div
+                  class="bg-white dark:bg-zinc-700 rounded-2xl shadow-normal p-2 sm:p-5 dark:text-white"
+                >
+                  <img src="images/products/p5.png" alt="" />
+                  <p
+                    class="pt-5 mb-1.5 text-sm sm:text-base xl:text-xl font-DanaMedium line-clamp-2"
+                  >
+                    قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی
+                  </p>
+                  <span
+                    class="text-emerald-700 pb-2.5 md:pb-4 inline-block sm:text-lg md:text-xl"
+                    >175,000 تومان</span
+                  >
+                  <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="bg-red w-9 h-9 flex justify-center items-center bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-teal-600 group cursor-pointer transition-all"
+                      >
+                        <svg
+                          class="size-5.5 text-gray-400 group-hover:text-white"
+                        >
+                          <use href="#shopping-cart"></use>
+                        </svg>
+                      </div>
+                      <svg
+                        class="size-5.5 text-gray-400 hover:text-teal-600 cursor-pointer"
+                      >
+                        <use href="#arrows-right-left"></use>
+                      </svg>
+                    </div>
+
+                    <div class="hidden sm:flex">
+                      <svg class="size-4 lg:size-6 text-gray-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-gray-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div
+                  class="bg-white dark:bg-zinc-700 rounded-2xl shadow-normal p-2 sm:p-5 dark:text-white"
+                >
+                  <img src="images/products/p6.png" alt="" />
+                  <p
+                    class="pt-5 mb-1.5 text-sm sm:text-base xl:text-xl font-DanaMedium line-clamp-2"
+                  >
+                    قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی
+                  </p>
+                  <span
+                    class="text-emerald-700 pb-2.5 md:pb-4 inline-block sm:text-lg md:text-xl"
+                    >175,000 تومان</span
+                  >
+                  <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="bg-red w-9 h-9 flex justify-center items-center bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-teal-600 group cursor-pointer transition-all"
+                      >
+                        <svg
+                          class="size-5.5 text-gray-400 group-hover:text-white"
+                        >
+                          <use href="#shopping-cart"></use>
+                        </svg>
+                      </div>
+                      <svg
+                        class="size-5.5 text-gray-400 hover:text-teal-600 cursor-pointer"
+                      >
+                        <use href="#arrows-right-left"></use>
+                      </svg>
+                    </div>
+
+                    <div class="hidden sm:flex">
+                      <svg class="size-4 lg:size-6 text-gray-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-gray-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div
+                  class="bg-white dark:bg-zinc-700 rounded-2xl shadow-normal p-2 sm:p-5 dark:text-white"
+                >
+                  <img src="images/products/p7.png" alt="" />
+                  <p
+                    class="pt-5 mb-1.5 text-sm sm:text-base xl:text-xl font-DanaMedium line-clamp-2"
+                  >
+                    قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی
+                  </p>
+                  <span
+                    class="text-emerald-700 pb-2.5 md:pb-4 inline-block sm:text-lg md:text-xl"
+                    >175,000 تومان</span
+                  >
+                  <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="bg-red w-9 h-9 flex justify-center items-center bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-teal-600 group cursor-pointer transition-all"
+                      >
+                        <svg
+                          class="size-5.5 text-gray-400 group-hover:text-white"
+                        >
+                          <use href="#shopping-cart"></use>
+                        </svg>
+                      </div>
+                      <svg
+                        class="size-5.5 text-gray-400 hover:text-teal-600 cursor-pointer"
+                      >
+                        <use href="#arrows-right-left"></use>
+                      </svg>
+                    </div>
+
+                    <div class="hidden sm:flex">
+                      <svg class="size-4 lg:size-6 text-gray-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-gray-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div
+                  class="bg-white dark:bg-zinc-700 rounded-2xl shadow-normal p-2 sm:p-5 dark:text-white"
+                >
+                  <img src="images/products/p8.png" alt="" />
+                  <p
+                    class="pt-5 mb-1.5 text-sm sm:text-base xl:text-xl font-DanaMedium line-clamp-2"
+                  >
+                    قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی
+                  </p>
+                  <span
+                    class="text-emerald-700 pb-2.5 md:pb-4 inline-block sm:text-lg md:text-xl"
+                    >175,000 تومان</span
+                  >
+                  <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="bg-red w-9 h-9 flex justify-center items-center bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-teal-600 group cursor-pointer transition-all"
+                      >
+                        <svg
+                          class="size-5.5 text-gray-400 group-hover:text-white"
+                        >
+                          <use href="#shopping-cart"></use>
+                        </svg>
+                      </div>
+                      <svg
+                        class="size-5.5 text-gray-400 hover:text-teal-600 cursor-pointer"
+                      >
+                        <use href="#arrows-right-left"></use>
+                      </svg>
+                    </div>
+
+                    <div class="hidden sm:flex">
+                      <svg class="size-4 lg:size-6 text-gray-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-gray-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div
+                  class="bg-white dark:bg-zinc-700 rounded-2xl shadow-normal p-2 sm:p-5 dark:text-white"
+                >
+                  <img src="images/products/p6.png" alt="" />
+                  <p
+                    class="pt-5 mb-1.5 text-sm sm:text-base xl:text-xl font-DanaMedium line-clamp-2"
+                  >
+                    قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی
+                  </p>
+                  <span
+                    class="text-emerald-700 pb-2.5 md:pb-4 inline-block sm:text-lg md:text-xl"
+                    >175,000 تومان</span
+                  >
+                  <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="bg-red w-9 h-9 flex justify-center items-center bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-teal-600 group cursor-pointer transition-all"
+                      >
+                        <svg
+                          class="size-5.5 text-gray-400 group-hover:text-white"
+                        >
+                          <use href="#shopping-cart"></use>
+                        </svg>
+                      </div>
+                      <svg
+                        class="size-5.5 text-gray-400 hover:text-teal-600 cursor-pointer"
+                      >
+                        <use href="#arrows-right-left"></use>
+                      </svg>
+                    </div>
+
+                    <div class="hidden sm:flex">
+                      <svg class="size-4 lg:size-6 text-gray-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-gray-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div
+                  class="bg-white dark:bg-zinc-700 rounded-2xl shadow-normal p-2 sm:p-5 dark:text-white"
+                >
+                  <img src="images/products/p5.png" alt="" />
+                  <p
+                    class="pt-5 mb-1.5 text-sm sm:text-base xl:text-xl font-DanaMedium line-clamp-2"
+                  >
+                    قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی
+                  </p>
+                  <span
+                    class="text-emerald-700 pb-2.5 md:pb-4 inline-block sm:text-lg md:text-xl"
+                    >175,000 تومان</span
+                  >
+                  <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="bg-red w-9 h-9 flex justify-center items-center bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-teal-600 group cursor-pointer transition-all"
+                      >
+                        <svg
+                          class="size-5.5 text-gray-400 group-hover:text-white"
+                        >
+                          <use href="#shopping-cart"></use>
+                        </svg>
+                      </div>
+                      <svg
+                        class="size-5.5 text-gray-400 hover:text-teal-600 cursor-pointer"
+                      >
+                        <use href="#arrows-right-left"></use>
+                      </svg>
+                    </div>
+
+                    <div class="hidden sm:flex">
+                      <svg class="size-4 lg:size-6 text-gray-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-gray-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div
+                  class="bg-white dark:bg-zinc-700 rounded-2xl shadow-normal p-2 sm:p-5 dark:text-white"
+                >
+                  <img src="images/products/p7.png" alt="" />
+                  <p
+                    class="pt-5 mb-1.5 text-sm sm:text-base xl:text-xl font-DanaMedium line-clamp-2"
+                  >
+                    قهوه ترک بن مانو مقدار 250 گرم خط دوم اسم طولانی
+                  </p>
+                  <span
+                    class="text-emerald-700 pb-2.5 md:pb-4 inline-block sm:text-lg md:text-xl"
+                    >175,000 تومان</span
+                  >
+                  <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2">
+                      <div
+                        class="bg-red w-9 h-9 flex justify-center items-center bg-gray-100 dark:bg-zinc-800 rounded-full hover:bg-teal-600 group cursor-pointer transition-all"
+                      >
+                        <svg
+                          class="size-5.5 text-gray-400 group-hover:text-white"
+                        >
+                          <use href="#shopping-cart"></use>
+                        </svg>
+                      </div>
+                      <svg
+                        class="size-5.5 text-gray-400 hover:text-teal-600 cursor-pointer"
+                      >
+                        <use href="#arrows-right-left"></use>
+                      </svg>
+                    </div>
+
+                    <div class="hidden sm:flex">
+                      <svg class="size-4 lg:size-6 text-gray-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-gray-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                      <svg class="size-4 lg:size-6 text-yellow-300">
+                        <use href="#star"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Coffee Club -->
+
+      <section>
+        <div class="container">
+          <div
+            class="bg-linear-to-r from-emerald-500 to-emerald-600 rounded-2xl py-8 px-3 lg:px-8 xl:px-11 h-auto lg:h-36 flex flex-col lg:flex-row lg:items-center text-white mb-8 md:mb-20 justify-between"
+          >
+            <div class="mb-8 lg:mb-0">
+              <div class="flex items-center gap-x-3 xl:gap-x-6">
+                <div>
+                  <img src="images/club/diamond.png" alt="" />
+                </div>
+                <div>
+                  <h3 class="text-2xl sm:text-5xl font-MorabbaBold mb-2">
+                    کافی کلاب
+                  </h3>
+                  <p class="font-MorabbaLight text-lg sm:text-2xl">
+                    میدونستی میتونی با امتیاز هات قهوه بگیری ؟
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="flex lg:justify-between items-center lg:w-[55%] xl:w-[50%]"
+            >
+              <div class="flex gap-3 xl:gap-5 flex-wrap justify-center">
+                <div
+                  class="text-emerald-600 bg-white rounded-2xl w-18 h-18 sm:w-24 sm:h-24 text-center"
+                >
+                  <img
+                    src="images/club/Activity.svg"
+                    alt=""
+                    class="w-8 h-8 sm:w-12 sm:h-12 mx-auto mt-3 sm:mt-5 inline-block"
+                  />
+                  <span class="inline-block text-xs sm:text-base"
+                    >چرخ و بخت</span
+                  >
+                </div>
+                <div
+                  class="text-emerald-600 bg-white rounded-2xl w-18 h-18 sm:w-24 sm:h-24 text-center"
+                >
+                  <img
+                    src="images/club/Discovery.svg"
+                    alt=""
+                    class="w-8 h-8 sm:w-12 sm:h-12 mx-auto mt-3 sm:mt-5 inline-block"
+                  />
+                  <span class="inline-block text-xs sm:text-base"
+                    >ماموریت ها</span
+                  >
+                </div>
+                <div
+                  class="text-emerald-600 bg-white rounded-2xl w-18 h-18 sm:w-24 sm:h-24 text-center"
+                >
+                  <img
+                    src="images/club/Ticket Star.svg"
+                    alt=""
+                    class="w-8 h-8 sm:w-12 sm:h-12 mx-auto mt-3 sm:mt-5 inline-block"
+                  />
+                  <span class="inline-block text-xs sm:text-base"
+                    >جایزه ها</span
+                  >
+                </div>
+              </div>
+
+              <div class="flex flex-col mr-10 grow items-center">
+                <span class="text-3xl font-DanaDemiBold">542</span>
+                <span class="text-sm mt-0 sm:mt-1 mb-1 sm:mb-2 text-nowrap"
+                  >امتیـــــــاز شما</span
+                >
+                <a
+                  href="#"
+                  class="flex items-center bg-linear-to-r from-orange-200 to-orange-300 rounded-full pr-2.5 pl-0.5 py-1"
+                >
+                  <span class="text-sm font-medium text-nowrap"
+                    >دریافت جایزه</span
+                  >
+                  <svg class="size-6">
+                    <use href="#chevron-left"></use>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-7 lg:mb-32">
+        <div class="container">
+          <div class="flex justify-between items-end mb-5 md:mb-12">
+            <div>
+              <h3 class="section-title">مطالب خواندنی</h3>
+            </div>
+
+            <a href="#" class="section-link">
+              <span class="hidden md:inline-block">مشاهده همه مطالب</span>
+              <span class="inline-block md:hidden">مشاهده همه</span>
+
+              <svg class="size-5">
+                <use href="#chevron-left-mini"></use>
+              </svg>
+            </a>
+          </div>
+          <div>
+            <!-- products -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              <div
+                class="bg-white dark:bg-zinc-700 shadow-normal p-2.5 rounded-2xl flex flex-row sm:flex-col gap-y-3 group gap-x-2.5 sm:gap-x-0"
+              >
+                <div
+                  class="relative rounded-2xl rounded-bl-4xl overflow-hidden"
+                >
+                  <img
+                    src="images/blogs/blog-1.png"
+                    alt=""
+                    class="h-[130px] w-[130px] sm:w-full sm:h-46.5 object-cover"
+                  />
+                  <div
+                    class="bg-linear-to-r hidden from-orange-200/80 to-orange-300/80 absolute inset-0 w-full h-full sm:flex justify-center items-center opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all delay-75"
+                  >
+                    <svg class="w-34.5 h-13.5 text-amber-900">
+                      <use href="#mobile-logo"></use>
+                    </svg>
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col sm:flex-row items-center justify-between mt-5 sm:mt-0"
+                >
+                  <div>
+                    <h4 class="max-w-48.25 dark:text-white line-clamp-2">
+                      طرز تهیه قهوه دمی با دستگاه اروپرس
+                    </h4>
+                  </div>
+
+                  <div class="flex justify-between w-full sm:w-auto">
+                    <div
+                      class="flex flex-row sm:flex-col ml-4.5 gap-x-1 sm:gap-x-0"
+                    >
+                      <span
+                        class="text-teal-600 dark:text-emerald-500 font-DanaDemiBold text-xs sm:text-2xl"
+                        >21</span
+                      >
+                      <span
+                        class="text-teal-600 dark:text-emerald-500 text-xs sm:text-sm"
+                        >مرداد</span
+                      >
+                      <span
+                        class="text-teal-600 dark:text-emerald-500 text-xs sm:text-sm"
+                        >1402</span
+                      >
+                    </div>
+                    <div
+                      class="flex sm:hidden items-center justify-center gap-x-1 bg-orange-200/20 text-orange-300 rounded-md w-[69px] h-5"
+                    >
+                      <span class="text-xs font-DanaMedium inline-block h-3"
+                        >مطالعه</span
+                      >
+                      <svg class="size-3.5">
+                        <use href="#chevron-left-mini"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-white dark:bg-zinc-700 shadow-normal p-2.5 rounded-2xl flex flex-row sm:flex-col gap-y-3 group gap-x-2.5 sm:gap-x-0"
+              >
+                <div
+                  class="relative rounded-2xl rounded-bl-4xl overflow-hidden"
+                >
+                  <img
+                    src="images/blogs/blog-2.png"
+                    alt=""
+                    class="h-[130px] w-[130px] sm:w-full sm:h-46.5 object-cover"
+                  />
+                  <div
+                    class="bg-linear-to-r hidden from-orange-200/80 to-orange-300/80 absolute inset-0 w-full h-full sm:flex justify-center items-center opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all delay-75"
+                  >
+                    <svg class="w-34.5 h-13.5 text-amber-900">
+                      <use href="#mobile-logo"></use>
+                    </svg>
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col sm:flex-row items-center justify-between mt-5 sm:mt-0"
+                >
+                  <div>
+                    <h4 class="max-w-48.25 dark:text-white line-clamp-2">
+                      یک نوشیدنی هیجان انگیز و پرکالری برای شروع روز
+                    </h4>
+                  </div>
+
+                  <div class="flex justify-between w-full sm:w-auto">
+                    <div
+                      class="flex flex-row sm:flex-col ml-4.5 gap-x-1 sm:gap-x-0"
+                    >
+                      <span
+                        class="text-teal-600 dark:text-emerald-500 font-DanaDemiBold text-xs sm:text-2xl"
+                        >21</span
+                      >
+                      <span
+                        class="text-teal-600 dark:text-emerald-500 text-xs sm:text-sm"
+                        >مرداد</span
+                      >
+                      <span
+                        class="text-teal-600 dark:text-emerald-500 text-xs sm:text-sm"
+                        >1402</span
+                      >
+                    </div>
+                    <div
+                      class="flex sm:hidden items-center justify-center gap-x-1 bg-orange-200/20 text-orange-300 rounded-md w-[69px] h-5"
+                    >
+                      <span class="text-xs font-DanaMedium inline-block h-3"
+                        >مطالعه</span
+                      >
+                      <svg class="size-3.5">
+                        <use href="#chevron-left-mini"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-white dark:bg-zinc-700 shadow-normal p-2.5 rounded-2xl flex flex-row sm:flex-col gap-y-3 group gap-x-2.5 sm:gap-x-0"
+              >
+                <div
+                  class="relative rounded-2xl rounded-bl-4xl overflow-hidden"
+                >
+                  <img
+                    src="images/blogs/blog-3.png"
+                    alt=""
+                    class="h-[130px] w-[130px] sm:w-full sm:h-46.5 object-cover"
+                  />
+                  <div
+                    class="bg-linear-to-r hidden from-orange-200/80 to-orange-300/80 absolute inset-0 w-full h-full sm:flex justify-center items-center opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all delay-75"
+                  >
+                    <svg class="w-34.5 h-13.5 text-amber-900">
+                      <use href="#mobile-logo"></use>
+                    </svg>
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col sm:flex-row items-center justify-between mt-5 sm:mt-0"
+                >
+                  <div>
+                    <h4 class="max-w-48.25 dark:text-white line-clamp-2">
+                      طرز تهیه یک فنجان کافه زینو برزیلی
+                    </h4>
+                  </div>
+
+                  <div class="flex justify-between w-full sm:w-auto">
+                    <div
+                      class="flex flex-row sm:flex-col ml-4.5 gap-x-1 sm:gap-x-0"
+                    >
+                      <span
+                        class="text-teal-600 dark:text-emerald-500 font-DanaDemiBold text-xs sm:text-2xl"
+                        >21</span
+                      >
+                      <span
+                        class="text-teal-600 dark:text-emerald-500 text-xs sm:text-sm"
+                        >مرداد</span
+                      >
+                      <span
+                        class="text-teal-600 dark:text-emerald-500 text-xs sm:text-sm"
+                        >1402</span
+                      >
+                    </div>
+                    <div
+                      class="flex sm:hidden items-center justify-center gap-x-1 bg-orange-200/20 text-orange-300 rounded-md w-[69px] h-5"
+                    >
+                      <span class="text-xs font-DanaMedium inline-block h-3"
+                        >مطالعه</span
+                      >
+                      <svg class="size-3.5">
+                        <use href="#chevron-left-mini"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-white dark:bg-zinc-700 shadow-normal p-2.5 rounded-2xl flex flex-row sm:flex-col gap-y-3 group gap-x-2.5 sm:gap-x-0"
+              >
+                <div
+                  class="relative rounded-2xl rounded-bl-4xl overflow-hidden"
+                >
+                  <img
+                    src="images/blogs/blog-4.png"
+                    alt=""
+                    class="h-[130px] w-[130px] sm:w-full sm:h-46.5 object-cover"
+                  />
+                  <div
+                    class="bg-linear-to-r hidden from-orange-200/80 to-orange-300/80 absolute inset-0 w-full h-full sm:flex justify-center items-center opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all delay-75"
+                  >
+                    <svg class="w-34.5 h-13.5 text-amber-900">
+                      <use href="#mobile-logo"></use>
+                    </svg>
+                  </div>
+                </div>
+
+                <div
+                  class="flex flex-col sm:flex-row items-center justify-between mt-5 sm:mt-0"
+                >
+                  <div>
+                    <h4 class="max-w-48.25 dark:text-white line-clamp-2">
+                      طرز تهیه قهوه دالگونا مناسب روز‌های کرونایی
+                    </h4>
+                  </div>
+
+                  <div class="flex justify-between w-full sm:w-auto">
+                    <div
+                      class="flex flex-row sm:flex-col ml-4.5 gap-x-1 sm:gap-x-0"
+                    >
+                      <span
+                        class="text-teal-600 dark:text-emerald-500 font-DanaDemiBold text-xs sm:text-2xl"
+                        >21</span
+                      >
+                      <span
+                        class="text-teal-600 dark:text-emerald-500 text-xs sm:text-sm"
+                        >مرداد</span
+                      >
+                      <span
+                        class="text-teal-600 dark:text-emerald-500 text-xs sm:text-sm"
+                        >1402</span
+                      >
+                    </div>
+                    <div
+                      class="flex sm:hidden items-center justify-center gap-x-1 bg-orange-200/20 text-orange-300 rounded-md w-[69px] h-5"
+                    >
+                      <span class="text-xs font-DanaMedium inline-block h-3"
+                        >مطالعه</span
+                      >
+                      <svg class="size-3.5">
+                        <use href="#chevron-left-mini"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--  -->
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-19 md:mb-32">
+        <div class="container">
+          <div
+            class="text-zinc-700 dark:text-white flex items-center flex-col lg:flex-row gap-x-5"
+          >
+            <div class="w-60 h-60 lg:w-75 lg:h-75 shrink-0">
+              <img src="images/contact.png" alt="" class="" />
+            </div>
+            <div class="flex flex-col justify-between">
+              <div class="">
+                <h3 class="text-2xl md:text-5xl font-MorabbaMedium mb-1.5">
+                  یکی از بهترین قهوه ها !
+                </h3>
+                <p class="text-lg md:text-3xl font-MorabbaMedium">
+                  کیفیت قهوه را از ما بخواهید ...
+                </p>
+                <span class="footer-dots mt-6 mb-3.5"></span>
+              </div>
+              <div>
+                <p class="text-lg md:text-2xl">
+                  فضای گرم و دنج ما را احساس کنید، جایی که همه می توانند قهوه
+                  معطری پیدا کنند و دسرهای خوشمزه ما را که کاملاً با قهوه داغ
+                  همراه شده است، امتحان کنند. فضای داخلی شیک و کارکنان خوش
+                  برخورد ما روز شما را می سازد!
+                </p>
+              </div>
+              <div>
+                <a
+                  href="#"
+                  class="inline-flex text-orange-300 items-center gap-x-1.5 border-2 rounded-full px-3 py-1.5 lg:px-5 lg:py-3.5 mt-6"
+                >
+                  <svg class="size-6 lg:size-8">
+                    <use href="#phone"></use>
+                  </svg>
+                  <span class="text-base lg:text-xl">ثبت سفارش تلفنی</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact-props mb-14 md:mb-36">
+        <div class="container">
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-11">
+            <div
+              class="flex flex-col sm:flex-row text-zinc-700 dark:text-white gap-x-4 gap-y-5"
+            >
+              <div class="mx-auto sm:mx-0">
+                <img src="images/svgs/services/coffee.svg " alt="" />
+              </div>
+              <div
+                class="flex flex-col justify-between text-center sm:text-right"
+              >
+                <p class="text-sm sm:text-base">پشتیبانی شبانه روزی</p>
+                <span class="text-xs sm:text-sm">7 روز هفته ، 24 ساعته</span>
+              </div>
+            </div>
+            <div
+              class="flex flex-col sm:flex-row text-zinc-700 dark:text-white gap-x-4 gap-y-5"
+            >
+              <div class="mx-auto sm:mx-0">
+                <img src="images/svgs/services/express-delivery.svg" alt="" />
+              </div>
+              <div
+                class="flex flex-col justify-between text-center sm:text-right"
+              >
+                <p class="text-sm sm:text-base">پشتیبانی شبانه روزی</p>
+                <span class="text-xs sm:text-sm">7 روز هفته ، 24 ساعته</span>
+              </div>
+            </div>
+            <div
+              class="flex flex-col sm:flex-row text-zinc-700 dark:text-white gap-x-4 gap-y-5"
+            >
+              <div class="mx-auto sm:mx-0">
+                <img src="images/svgs/services/pitcher.svg" alt="" />
+              </div>
+              <div
+                class="flex flex-col justify-between text-center sm:text-right"
+              >
+                <p class="text-sm sm:text-base">پشتیبانی شبانه روزی</p>
+                <span class="text-xs sm:text-sm">7 روز هفته ، 24 ساعته</span>
+              </div>
+            </div>
+            <div
+              class="flex flex-col sm:flex-row text-zinc-700 dark:text-white gap-x-4 gap-y-5"
+            >
+              <div class="mx-auto sm:mx-0">
+                <img src="images/svgs/services/support.svg" alt="" />
+              </div>
+              <div
+                class="flex flex-col justify-between text-center sm:text-right"
+              >
+                <p class="text-sm sm:text-base">پشتیبانی شبانه روزی</p>
+                <span class="text-xs sm:text-sm">7 روز هفته ، 24 ساعته</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-zinc-700 relative">
+      <svg
+        class="w-[100px] h-[22px] hidden md:inline-block absolute -top-0.5 right-0 left-0 mx-auto text-white dark:text-zinc-800"
+      >
+        <use href="#curve-footer"></use>
+      </svg>
+
+      <div
+        class="absolute left-0 right-0 -top-[15px] mx-auto text-white hidden md:flex justify-center"
+      >
+        <div
+          class="w-7.5 h-7.5 border-2 border-orange-300 flex justify-center items-center rounded-full"
+        >
+          <svg class="size-5 text-zinc-700 dark:text-white rotate-180">
+            <use href="#chevron-down"></use>
+          </svg>
+        </div>
+      </div>
+
+      <div
+        class="w-[98%] lg:w-[90%] mx-auto flex flex-col xl:flex-row md:justify-between text-gray-300 py-8 md:pt-[62px] md:pb-11 gap-y-10 gap-x-10"
+      >
+
+
+        <div class="flex flex-col gap-y-6 md:gap-y-[18px]">
+          <div class="flex gap-3.5 text-gray-300">
+            <img class="w-[57px] h-[54px]" src="images/app-logo.png" alt="" />
+            <svg class="w-[138px] h-[54px]">
+              <use href="#mobile-logo"></use>
+            </svg>
+          </div>
+          <p class="text-lg md:text-xl max-w-150 xl:max-w-200">
+            ما برآنیم تا با پیشرو بودن در فرآیند تولید، نوع و کیفیت محصول، خدمات
+            و توزیع، الگویی برای تولیدکنندگان ایرانی باشیم و به مرجع فرهنگ قهوه
+            در ایران تبدیل شویم. می‌پنداریم که نظر مردم ایران و منطقه باید نسبت
+            به کالای ایرانی بهبود یابد و در این راستا با اشتیاق می‌کوشیم.
+          </p>
+        </div>
+        <div class="flex flex-col md:flex-row gap-y-10 gap-x-10 ">
+          <div class="flex gap-y-6 flex-col md:gap-y-7 shrink-0">
+            <h3 class="font-DanaDemiBold text-2xl text-white">دسترسی سریع</h3>
+
+            <ul class="flex gap-x-8">
+              <div class="flex flex-col gap-y-2.5 md:gap-y-5">
+                <li class="flex items-center gap-x-2 md:gap-x-3">
+                  <span
+                    class="w-2 md:w-2.5 h-1 inline-block bg-gray-300 rounded-full"
+                  ></span>
+                  <span class="md:text-lg">ثبت سفارش</span>
+                </li>
+                <li class="flex items-center gap-x-2 md:gap-x-3">
+                  <span
+                    class="w-2 md:w-2.5 h-1 inline-block bg-gray-300 rounded-full"
+                  ></span>
+                  <span class="md:text-lg">شرایط استفاده</span>
+                </li>
+                <li class="flex items-center gap-x-2 md:gap-x-3">
+                  <span
+                    class="w-2 md:w-2.5 h-1 inline-block bg-gray-300 rounded-full"
+                  ></span>
+                  <span class="md:text-lg">عودت کالا</span>
+                </li>
+                <li class="flex items-center gap-x-2 md:gap-x-3">
+                  <span
+                    class="w-2 md:w-2.5 h-1 inline-block bg-gray-300 rounded-full"
+                  ></span>
+                  <span class="md:text-lg">حریم خصوصی</span>
+                </li>
+              </div>
+              <div class="flex flex-col gap-y-2.5 md:gap-y-5">
+                <li class="flex items-center gap-x-2 md:gap-x-3">
+                  <span
+                    class="w-2 md:w-2.5 h-1 inline-block bg-gray-300 rounded-full"
+                  ></span>
+                  <span class="md:text-lg">ارتباط با ما</span>
+                </li>
+                <li class="flex items-center gap-x-2 md:gap-x-3 text-orange-300">
+                  <span
+                    class="w-2 md:w-2.5 h-1 inline-block bg-orange-300 rounded-full"
+                  ></span>
+                  <span class="md:text-lg">فرصت های شغلی</span>
+                </li>
+                <li class="flex items-center gap-x-2 md:gap-x-3">
+                  <span
+                    class="w-2 md:w-2.5 h-1 inline-block bg-gray-300 rounded-full"
+                  ></span>
+                  <span class="md:text-lg">ضمانت نامه ها</span>
+                </li>
+                <li class="flex items-center gap-x-2 md:gap-x-3">
+                  <span
+                    class="w-2 md:w-2.5 h-1 inline-block bg-gray-300 rounded-full"
+                  ></span>
+                  <span class="md:text-lg">پرسش های متداول</span>
+                </li>
+              </div>
+            </ul>
+          </div>
+
+          <div>
+            <div class="flex flex-col gap-y-6 md:gap-y-7 shrink-0">
+              <h3 class="font-DanaDemiBold text-2xl text-white">
+                در تماس باشیم
+              </h3>
+            </div>
+            <div class="">
+
+              <div class="flex mt-6 md:mt-7 gap-x-2 md:gap-x-3">
+                <div class="h-5 w-5">
+                 <svg class="size-5">
+                  <use href="#map-mini"></use>
+                </svg>
+                </div>
+                <p class="md:text-lg">
+                  بلوار میرداماد، خیابان البرز، کوچه قبادیان شرقی، پلاک ۳۳
+                </p>
+              </div>
+
+              <div class="flex flex-col  mt-4 md:mt-5">
+
+                <div class="flex items-center gap-x-2 text-orange-300">
+                  <svg class="size-5">
+                    <use href="#envelope"></use>
+                  </svg>
+                  <p>info@Coffee.com</p>
+                </div>
+
+
+                <div class="mt-4.5">
+                  <div class="flex items-center">
+                    <svg class="size-5 ml-2">
+                      <use href="#phone"></use>
+                    </svg>
+                    <span class="inline-block ml-3 text-sm" dir="ltr">0902 123 6628</span>
+                    <span class="inline-block text-sm" dir="ltr">0902 123 6628</span>
+                  </div>
+                </div>
+
+                
+              <div class="text-orange-200 mt-8 gap-2 md:gap-x-6 flex flex-wrap">
+                <a href="#" class="py-2  px-2 border border-orange-200 inline-flex items-center rounded-xl gap-1">
+                  <svg  class="size-5" viewBox="0 0 38 38" fill="none" >
+                    <path d="M31.0136 7.9292C32.3492 7.9292 32.7007 8.93937 32.3056 11.3112C31.8536 14.0234 30.5513 23.0033 29.5126 28.5933C29.1152 30.7324 28.3988 31.6547 27.3561 31.6547C26.783 31.6547 26.1116 31.376 25.3405 30.867C24.2955 30.1766 19.0199 26.6877 17.8743 25.8684C16.8293 25.1218 15.3877 24.2233 17.1959 22.4547C17.8395 21.8245 22.0567 17.7973 25.3421 14.6631C25.6928 14.3282 25.3991 13.8176 25.0096 13.8176C24.921 13.8176 24.8268 13.8445 24.7349 13.9055C20.3063 16.8426 14.1654 20.9189 13.384 21.4501C12.6026 21.9805 11.841 22.3209 10.8261 22.3209C10.3076 22.3209 9.72255 22.2322 9.03459 22.0343C7.49638 21.5926 5.99459 21.0661 5.40955 20.865C3.15726 20.0924 3.69163 19.0909 5.87901 18.1282C14.6491 14.2704 25.9976 9.56637 27.5643 8.91562C29.0907 8.28149 30.2243 7.9292 31.0136 7.9292ZM31.0136 5.5542C29.9306 5.5542 28.6268 5.90332 26.6547 6.72112L26.418 6.81928C17.9986 10.3153 10.3646 13.5595 4.92267 15.9535C4.07242 16.328 1.48605 17.4656 1.58659 19.8454C1.62934 20.8722 2.19459 22.2718 4.63926 23.1102L4.81976 23.172C5.50217 23.4071 6.92322 23.8971 8.37988 24.3159C9.26655 24.5708 10.0677 24.6943 10.8269 24.6943C12.1443 24.6943 13.1647 24.3183 13.9627 23.8805C13.9588 24.0135 13.9619 24.1473 13.9722 24.2819C14.1163 26.1122 15.5318 27.116 16.3773 27.7161L16.4953 27.8C17.7437 28.693 23.3938 32.4257 24.0335 32.8477C25.2376 33.6425 26.3246 34.0281 27.3577 34.0281C28.9822 34.0281 31.0809 33.1604 31.8488 29.0263C32.578 25.1052 33.4203 19.6277 34.0354 15.6282C34.2975 13.9213 34.5128 12.5217 34.6498 11.7007C34.9261 10.0429 35.0527 8.16512 33.8993 6.80424C33.4148 6.23424 32.5218 5.5542 31.0136 5.5542Z" fill="#FED7AA"/>
+                  </svg>
+
+                  <span class="font-DanaMedium text-base -mb-1">@golden_coffee</span>
+                </a>
+                <a href="#" class="py-2 px-2  bg-linear-to-r from-orange-200 to-orange-300 inline-flex items-center rounded-xl gap-1 ">
+                  <svg  class="size-5" viewBox="0 0 38 38" fill="none">
+                    <path d="M31.0136 7.9292C32.3492 7.9292 32.7007 8.93937 32.3056 11.3112C31.8536 14.0234 30.5513 23.0033 29.5126 28.5933C29.1152 30.7324 28.3988 31.6547 27.3561 31.6547C26.783 31.6547 26.1116 31.376 25.3405 30.867C24.2955 30.1766 19.0199 26.6877 17.8743 25.8684C16.8293 25.1218 15.3877 24.2233 17.1959 22.4547C17.8395 21.8245 22.0567 17.7973 25.3421 14.6631C25.6928 14.3282 25.3991 13.8176 25.0096 13.8176C24.921 13.8176 24.8268 13.8445 24.7349 13.9055C20.3063 16.8426 14.1654 20.9189 13.384 21.4501C12.6026 21.9805 11.841 22.3209 10.8261 22.3209C10.3076 22.3209 9.72255 22.2322 9.03459 22.0343C7.49638 21.5926 5.99459 21.0661 5.40955 20.865C3.15726 20.0924 3.69163 19.0909 5.87901 18.1282C14.6491 14.2704 25.9976 9.56637 27.5643 8.91562C29.0907 8.28149 30.2243 7.9292 31.0136 7.9292ZM31.0136 5.5542C29.9306 5.5542 28.6268 5.90332 26.6547 6.72112L26.418 6.81928C17.9986 10.3153 10.3646 13.5595 4.92267 15.9535C4.07242 16.328 1.48605 17.4656 1.58659 19.8454C1.62934 20.8722 2.19459 22.2718 4.63926 23.1102L4.81976 23.172C5.50217 23.4071 6.92322 23.8971 8.37988 24.3159C9.26655 24.5708 10.0677 24.6943 10.8269 24.6943C12.1443 24.6943 13.1647 24.3183 13.9627 23.8805C13.9588 24.0135 13.9619 24.1473 13.9722 24.2819C14.1163 26.1122 15.5318 27.116 16.3773 27.7161L16.4953 27.8C17.7437 28.693 23.3938 32.4257 24.0335 32.8477C25.2376 33.6425 26.3246 34.0281 27.3577 34.0281C28.9822 34.0281 31.0809 33.1604 31.8488 29.0263C32.578 25.1052 33.4203 19.6277 34.0354 15.6282C34.2975 13.9213 34.5128 12.5217 34.6498 11.7007C34.9261 10.0429 35.0527 8.16512 33.8993 6.80424C33.4148 6.23424 32.5218 5.5542 31.0136 5.5542Z" fill="#3f3f46"/>
+                  </svg>
+
+                  <span class="font-DanaMedium text-base text-zinc-700 -mb-1">@golden_coffee</span>
+                </a>
+              </div>
+
+
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+
+      <span class="w-full h-px bg-white/10 inline-block mb-10"></span>
+
+        <div class="text-white flex flex-col gap-y-4 xl:flex-row justify-between w-[98%] lg:w-[90%] mx-auto pb-12">
+          <div class="text-xs items-center flex md:text-sm">
+            <span class="dot-dot shrink-0 mr-6  sm:mr-0 w-2.5 h-2.5 bg-orange-300 rounded-full ml-5"></span>
+            تمام حقوق این رابط کاربری متعلق به سبزلرن میباشد و دانشجوی این دوره اجازه استفاده آن را در مصارف شخصی و تجاری ندارد.
+          </div>
+          <span class="text-xs md:text-sm text-left">Copyright © 2023 Golden Coffee. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/swiper-bundle.min.js"></script>
+    <script>
+      const swiper = new Swiper(".swiper", {
+        slidesPerView: 2,
+        spaceBetween: 20,
+        navigation: {
+          nextEl: ".swiper-button-next-custom",
+          prevEl: ".swiper-button-prev-custom",
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 20,
+          },
+        },
+        initialSlide: 2,
+      });
+    </script>
+  </body>
+</html>
