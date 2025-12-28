@@ -1,6 +1,6 @@
 <h1>HTML TAILWIND PROJECT</h1>
 
-## See this Project in  [THIS LINK](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
+## See this Project in  [THIS LINK](https://shayankiko.github.io/HTML-Tailwind)
 
 
 
@@ -9,4 +9,4 @@
 
 ![TailwindCss](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-<a href="https://www.animatedimages.org/cat-crocodiles-210.htm"><img src="https://www.animatedimages.org/data/media/210/animated-crocodile-image-0008.gif" border="0" alt="animated-crocodile-image-0008" /></a>
+<a ><img src="https://www.animatedimages.org/data/media/210/animated-crocodile-image-0008.gif" border="0" alt="animated-crocodile-image-0008" /></a>
