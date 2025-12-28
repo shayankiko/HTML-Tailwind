@@ -50,5 +50,6 @@ xMarkCart.addEventListener("click", () => {
 });
 overlay.addEventListener("click", () => {
   mobileNav.classList.remove("right-nav-0");
+  mobileCart.classList.remove("left-0");
   overlay.classList.remove("block-nav");
 });
